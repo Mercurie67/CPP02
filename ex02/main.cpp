@@ -4,14 +4,30 @@ int main()
 {
 	Fixed a;
 	Fixed b( Fixed( 5.05f ) * Fixed( 2 ) );
+	Fixed c = Fixed::max( a, b );
+	Fixed d(5.05f);
 
-	std::cout << a << std::endl;
-	std::cout << ++a << std::endl;
-	std::cout << a << std::endl;
-	std::cout << a++ << std::endl;
-	std::cout << b << std::endl;
+	std::cout << "Valor de a: " << a << std::endl; 
+	std::cout << "Valor de ++a: " << ++a << std::endl;
+	std::cout << "Valor de a: " << a << std::endl;
+	std::cout << "Valor de a++: " << a++ << std::endl;
+	std::cout << "Valor de a: " << a << std::endl;
 
-	std::cout << Fixed::max( a, b ) << std::endl;
+	std::cout << "Valor de b: " <<b << std::endl;
+	std::cout << "Valor de --b: " <<--b << std::endl;
+	std::cout << "Valor de b: " <<b << std::endl;
+	std::cout << "Valor de b--: " <<b-- << std::endl;
+	std::cout << "Valor de b: " <<b << std::endl;
+
+	std::cout << "Valor de a * b: " << a * b << std::endl;
+	std::cout << "Valor de a + b: " <<a + b << std::endl;
+	std::cout << "Valor de a - b: " <<a - b << std::endl;
+	std::cout << "Valor de a / b: " << a / b << std::endl;
+
+	std::cout << "El valor mayor es: " << Fixed::max( a, b ) << std::endl;
+	std::cout << std::boolalpha;
+	std::cout << "¿Son estos números iguales? " << (a == b) << std::endl;
+	std::cout << "¿Son estos números diferentes? " << (a != b) << std::endl;
 
 	return 0;
 }
