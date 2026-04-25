@@ -1,50 +1,62 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Fixed.cpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: medel-ca <medel-ca@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/25 16:55:35 by medel-ca          #+#    #+#             */
+/*   Updated: 2026/04/25 16:55:35 by medel-ca         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Fixed.hpp"
 
-Fixed::Fixed(void) : rawBits(0) {}
+Fixed::Fixed(void) : _rawBits(0) {}
 
 Fixed::Fixed(const int value)
 {
-    rawBits = value << bits;
+    _rawBits = value << _bits;
 }
 
 Fixed::Fixed(const float value)
 {
-    rawBits = roundf(value * (1 << bits));
+    _rawBits = roundf(value * (1 << _bits));
 }
 
-Fixed::Fixed(const Fixed &other) : rawBits(other.rawBits) {}
+Fixed::Fixed(const Fixed &other) : _rawBits(other._rawBits) {}
 
 Fixed &Fixed::operator=(const Fixed &other)
 {
-    if (*this != other)
-        rawBits = other.rawBits;
-    return (*this);
+    if (this != &other)
+        _rawBits = other._rawBits;
+    return *this;
 }
 
 Fixed::~Fixed(void) {}
 
 int Fixed::getRawBits(void) const
 {
-    return (rawBits);
+    return _rawBits;
 }
 void Fixed::setRawBits(int const raw)
 {
-    rawBits = raw;
+   _rawBits = raw;
 }
 
 float Fixed::toFloat(void) const
 {
-    return (float)rawBits / (1 << bits);
+    return (float)_rawBits / (1 << _bits);
 }
 
 int Fixed::toInt(void) const
 {
-    return rawBits / (1 << bits);
+    return _rawBits / (1 << _bits);
 }
 
 bool Fixed::operator>(const Fixed &other) const
 {
-    return (rawBits > other.rawBits);
+    return _rawBits > other._rawBits;
 }
 bool Fixed::operator<(const Fixed &other) const
 {
@@ -60,7 +72,7 @@ bool Fixed::operator<=(const Fixed &other) const
 }
 bool Fixed::operator==(const Fixed &other) const
 {
-    return (rawBits == other.rawBits);
+    return _rawBits == other._rawBits;
 }
 bool Fixed::operator!=(const Fixed &other) const
 {
@@ -87,60 +99,60 @@ Fixed &Fixed::max(Fixed &a, Fixed &b)
 Fixed Fixed::operator+(const Fixed&other) const
 {
     Fixed result;
-    result.rawBits = this->rawBits + other.rawBits;
-    return (result);
+    result._rawBits = this->_rawBits + other._rawBits;
+    return result;
 }
 
 Fixed Fixed::operator-(const Fixed&other) const
 {
     Fixed result;
-    result.rawBits = this->rawBits - other.rawBits;
-    return (result);
+    result._rawBits = this->_rawBits - other._rawBits;
+    return result;
 }
 
 Fixed Fixed::operator*(const Fixed&other) const
 {
     Fixed result;
-    result.rawBits = (long)rawBits * other.rawBits >> bits;
-    return (result);
+    result._rawBits = (long)_rawBits * other._rawBits >> _bits;
+    return result;
 }
 
 Fixed Fixed::operator/(const Fixed&other) const
 {
-    if (other.rawBits == 0)
+    if (other._rawBits == 0)
     {
         std::cout << "Error: division by zero" << std::endl;
         return Fixed();
     }
     Fixed result;
-    result.rawBits = ((long)rawBits << bits) / other.rawBits;
-    return (result);
+    result._rawBits = ((long)_rawBits << _bits) / other._rawBits;
+    return result;
 }
 
 Fixed &Fixed::operator++( void )
 {
-    rawBits++;
-    return (*this);
+    _rawBits++;
+    return *this;
 }
 
 Fixed &Fixed::operator--( void )
 {
-    rawBits--;
-    return (*this);
+    _rawBits--;
+    return *this;
 }
 
 Fixed Fixed::operator++(int)
 {
     Fixed temp(*this);
-    rawBits++;
-    return (temp);
+    _rawBits++;
+    return temp;
 }
 
 Fixed Fixed::operator--(int)
 {
     Fixed temp(*this);
-    rawBits--;
-    return (temp);
+    _rawBits--;
+    return temp;
 }
 
 std::ostream& operator<<(std::ostream& out, const Fixed &fixed)

@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: medel-ca <medel-ca@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/25 16:54:46 by medel-ca          #+#    #+#             */
+/*   Updated: 2026/04/25 16:54:46 by medel-ca         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FIXED_HPP
 # define FIXED_HPP
-# include <iostream>
+#include <iostream>
 #include <math.h>
 
 class Fixed
 {
     private:
-        int rawBits;
-        static const int bits = 8;
+        int _rawBits;
+        static const int _bits = 8;
     public:
         Fixed(void);
         Fixed(const int value);

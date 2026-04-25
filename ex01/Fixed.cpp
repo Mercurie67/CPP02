@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Fixed.cpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: medel-ca <medel-ca@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/25 16:54:29 by medel-ca          #+#    #+#             */
+/*   Updated: 2026/04/25 16:54:29 by medel-ca         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Fixed.hpp"
 
-Fixed::Fixed(void) : rawBits(0)
+Fixed::Fixed(void) : _rawBits(0)
 {
     std::cout << "Default constructor called" << std::endl;
 }
@@ -8,16 +20,16 @@ Fixed::Fixed(void) : rawBits(0)
 Fixed::Fixed(const int value)
 {
     std::cout << "Int constructor called" << std::endl;
-    rawBits = value << bits;
+    _rawBits = value << _bits;
 }
 
 Fixed::Fixed(const float value)
 {
     std::cout << "Float constructor called" << std::endl;
-    rawBits = roundf(value * (1 << bits));
+    _rawBits = roundf(value * (1 << _bits));
 }
 
-Fixed::Fixed(const Fixed &other) : rawBits(other.rawBits)
+Fixed::Fixed(const Fixed &other) : _rawBits(other._rawBits)
 {
     std::cout << "Copy constructor called" << std::endl;
 }
@@ -26,7 +38,7 @@ Fixed &Fixed::operator=(const Fixed &other)
 {
     std::cout << "Copy Assignment operator called" << std::endl;
     if (this != &other)
-        this->rawBits = other.rawBits;
+        this->_rawBits = other._rawBits;
     return *this;
 }
 
@@ -38,20 +50,20 @@ Fixed::~Fixed(void)
 int Fixed::getRawBits (void) const
 {
     std::cout << "getRawBits member function called" << std::endl;
-    return (rawBits);
+    return (_rawBits);
 }
 void Fixed::setRawBits(int const raw)
 {
-    rawBits = raw;
+    _rawBits = raw;
 }
 
 float Fixed::toFloat( void ) const
 {
-    return (float)rawBits / (1 << bits);
+    return (float)_rawBits / (1 << _bits);
 }
 int Fixed::toInt( void ) const
 {
-    return rawBits / (1 << bits);
+    return _rawBits / (1 << _bits);
 }
 
 std::ostream& operator<<(std::ostream& out, const Fixed &fixed)
